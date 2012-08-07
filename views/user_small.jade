@@ -1,0 +1,8 @@
+.user_small
+	.avatar
+	a(href='/user/#{user.id}')
+		.avatar
+			img(src='http://www.gravatar.com/avatar/efc1a44cc1beb3a11ad92840c294f4da?s=160')
+			// replace hash with user hash
+		h3= user.nickname
+		

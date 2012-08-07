@@ -1,0 +1,140 @@
+script(type="text/javascript", src="http://10.242.11.168:8080/socket.io/socket.io.js")
+
+script(type="text/javascript")
+	var socket = io.connect(null,{
+		'reconnect': true,
+		'reconnection delay': 500,
+		'max reconnection attempts': 10});
+	
+	socket.on('this', function (data, id) {
+		if (document.getElementById("newActivityLoader")==null)
+			$(".questions").prepend("<a href='javascript:tranfserNewActivity();' id='newActivityLoader' number='1'> 1 New Activity </a>");
+		else{
+			var numNewActivity = $("#newActivityLoader").attr("number");
+			numNewActivity++;
+			$("#newActivityLoader").attr("number", numNewActivity);
+			$("#newActivityLoader").html(numNewActivity + " New Activities");
+		}
+		if (document.getElementById(id+"_question")!=null){
+			$("#"+id+"_question").remove();
+			$("#"+id+"_answers").remove();
+		}
+		$(".newActivity").prepend(data);
+	});
+	
+	socket.on('newReplyToFollow', function(html) {
+		$("div.ticker").prepend(html);
+	});
+	
+	socket.on('followed', function(id) {
+		$("#"+id+"_follow").html("Unfollow Question");
+		$("#"+id+"_follow").attr("href", "javascript:unfollowQuestion('"+id+"')");
+	});
+	
+	socket.on('unfollowed', function(id) {
+		$("#"+id+"_follow").html("Follow Question");
+		$("#"+id+"_follow").attr("href", "javascript:followQuestion('"+id+"')");
+	});
+	
+	socket.on('answerUpdated', function(answer, id){
+		$question = $("#"+id);
+		if ($question.length){
+			$question.find(".answers").append(answer);
+			var ansCount = $question.find(".answer").length;
+			$question.find(".answerCount").html(ansCount + " answers");
+		}
+	});
+	
+	socket.on('takeTheseReplies', function(data, id){
+		expandQuestion(data, id);
+	});
+	
+	socket.on('deleted', function(id){
+		$("#"+id).remove();
+	});
+	
+	function deleteQuestion(id){
+		socket.emit('deleteQuestion', id);
+	}	
+	
+	function tranfserNewActivity(){
+		$(".questions").prepend($(".newActivity").html());
+		$("#newActivityLoader").remove();
+		$(".newActivity").html("");
+	}
+	
+	function unfollowQuestion(id){
+		socket.emit('unfollowQuestion', id); 
+	}
+	
+	function followQuestion(id){
+		socket.emit('followQuestion', id); 
+	}
+
+	function sendBroadcast(){
+		msg = document.getElementById("question_input").value;
+		topics = $("#topic_input").val();
+		if (msg.trim()!=""){
+			socket.emit('question', msg, topics);
+			document.getElementById("question_input").value = "";
+		}
+		return false;
+	}
+	
+	function getReplies(id){
+		socket.emit('getReplies', id);
+	}
+	
+	function expandQuestion(data, id){
+		$("#"+id+"_answers").append(data);
+		$("#"+id+"_popout").html("Hide Replies");
+		$("#"+id+"_popout").attr('onClick','hideReplies("'+id+'")');
+	}
+	
+	function hideReplies(id){
+		$("#"+id+"_answers").html("");
+		$("#"+id+"_popout").html("Expand Replies");
+		$("#"+id+"_popout").attr('onClick','getReplies("'+id+'")');
+	}
+	
+	function sendReply(id){
+		var answer = $("#answer_"+id).val();
+		socket.emit('answer', answer, id);
+		$("#answer_"+id).val("");
+	}
+	
+	function trackEnter(e,id){
+		var characterCode
+		if(e && e.which){ // NN4 specific code
+			e = e
+			characterCode = e.which
+		}
+		else {
+			e = event
+			characterCode = e.keyCode // IE specific code
+		}
+		if (characterCode == 13)
+			sendReply(id);
+	}
+	
+	function openGuider(id){
+		if (document.getElementById("answer_"+id)==null){
+			html='<div><textarea rows="2" id="answer_'+id+'" cols="62" placeholder="Answer Here" onkeydown="trackEnter(event, \''+id+'\')"/></div>';
+			$("#"+id+"_answers").prepend(html);
+		}
+	}
+include navbar
+.container
+	.row
+		.main.span8
+			script(src="bill/js/question_interactions.js")
+			include newQuestion
+			h2 Questions
+			a.filter(data="all") All |
+			a.filter(data="my")  My Questions | 
+			a.filter(data="followed") Followed
+			.newActivity
+			.questions
+				-each question in questions
+					include question_details
+		include sidebar

@@ -1,0 +1,216 @@
+html {
+    overflow-y: scroll;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 { font-weight: 600; }
+a {text-decoration: none;}
+a:hover {text-decoration: underline;}
+
+.questions {
+	margin-top: 1.5em;
+}
+.question {
+	border-bottom: 1px dashed #ccc;
+	cursor: pointer;
+	float: left;
+}
+
+.question, .answer {
+	margin-bottom: .75em;
+	padding-bottom: .75em;
+}
+
+.question_title {
+	font-size: 20px;
+	float: left;
+	clear: both;
+}
+
+#question_input {
+	width: 250px;
+}
+
+#topic_input {
+	width: 170px;
+}
+
+.add_question input {
+	margin-right: .25em;
+}
+
+.info {
+	color: #666;
+	float: right;
+}
+
+.info span, .answer .info{
+	font-size:80%;
+}
+
+.question_body > .info {  } 
+
+.answer_status {
+	float: left;
+	width: 15%;
+	margin-top: 1.5em;
+}
+
+.question_body {
+	width: 85%;
+	float: right;
+}
+
+.answers {
+	margin: 0 .75em 0 .75em;
+	float: left;
+	clear: both;
+	width: 90%;
+}
+
+.answer {
+	border-bottom: 1px solid #ebebeb;
+	width: 100%;
+}
+
+.answer_text {
+	width: 75%;
+	margin-right: .2em;
+}
+
+.details {
+	display: none;
+	width: 100%;
+	float: left;
+}
+
+.add_answer {
+	float: left;
+	clear: both;
+	width: 100%;
+}
+
+.topics, .actions {
+	margin-right: 1.5em;
+	float: left;
+	clear: both;
+}
+
+.actions{
+	width:100%;
+}
+
+
+.topic {
+	float: left;
+	margin-right: .75em;
+}
+
+.actions a {
+	font-size: 80%;
+	margin-right: .75em;
+	color: #666;
+}
+
+.info a{
+	color:#279327;
+}
+
+.actions a:hover {color: #279327;}
+
+.outer-center {
+    width: 100%;
+	overflow: hidden;
+	position: absolute;
+}
+.inner-center {
+    float: left;
+    left: 50%;
+    position: relative;
+}
+
+div.clear {clear: both; line-height: 0; height: 0;}
+
+.alert {
+	float: left;
+    right: 50%;
+    position: relative;
+}
+
+
+// Bootstrap fixing
+
+form {
+  margin: 0 0 0 0;
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  display: inline-block;
+  height: 24px;
+  padding: 4px;
+  margin-bottom: 0px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #555555;
+}
+
+.well {
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+.question {
+	margin-left: 10px;
+}
+
+
+.newActivity{
+	display:none;
+}
+
+.ticker{
+	float:left;
+	clear:both;
+}
+
+#newActivityLoader{
+	color:black;
+	text-align:center;
+	padding:5px;
+	display:block;
+	margin-bottom:10px;
+	background-color:#f1f2f2;
+}
+
+#question_input, .tagsinput{
+	width:100%;
+}
+
+.filter{
+	cursor:pointer;
+}
+
+#topic_filter{
+	margin:1em 0 1em 0;
+}
+
+.updates{
+	position:fixed;
+}

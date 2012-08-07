@@ -1,0 +1,30 @@
+script(type="text/javascript")
+	$(document).ready(function() {
+		$("#signup").click(function(){
+			$.ajax({
+				url: 'newUser',
+				cache: false,
+				timeout: 5000,
+				success: function(data) {
+					$("#signUpForm").html(data);
+				},
+				error: function() {
+				}
+			});
+		});
+	});
+	
+.container
+	h1= title
+	p Login below with your credentials
+	
+	form(action="login", method="post")
+		div
+			input#username(name="email", placeholder="Username")
+		div
+			input#password(name="password", type="password", placeholder="Password")
+		div.loginActions
+			input#login(type="submit", value="Login")
+			<!--a#signup Sign Up-->
+	div#signUpForm
+	

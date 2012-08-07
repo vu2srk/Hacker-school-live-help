@@ -1,0 +1,19 @@
+.navbar
+	.navbar-inner
+		.container
+			a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+			a.brand(href="#") HS Help
+			//form.navbar-search.pull-left
+			//	input.search-query.span2(type="text")
+			.nav-collapse
+				ul.nav.pull-right
+					li.dropdown
+						a.dropdown-toggle(href="#", data-toggle="dropdown")
+							= name
+							b.caret
+						ul.dropdown-menu
+							form(method="post", action="logout")
+								a#logout(onclick='parentNode.submit()') Logout

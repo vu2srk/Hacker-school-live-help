@@ -1,0 +1,13 @@
+.user
+	.avatar
+		img(src='http://www.gravatar.com/avatar/efc1a44cc1beb3a11ad92840c294f4da')
+		// replace hash with user hash
+	.form
+		form(method="post", action="updateUser")
+			input(type='text', name='nickname', placeholder='nickname')
+			input(type='text', name='name', placeholder='name')
+			input(type='text', name='irc', placeholder='irc')
+			input(type='text', name='email', placeholder='email')
+			input.topics(type='text', name='topics', placeholder='Topics')
+			input(type='submit', value='Update')
+		

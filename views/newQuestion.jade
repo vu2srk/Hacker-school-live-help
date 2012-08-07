@@ -1,0 +1,6 @@
+.add_question
+	.form
+		form.well(method="post", onsubmit="sendBroadcast();return false;")
+			input#question_input(type='text', name='title', placeholder='Question', autocomplete="off")
+			input#topic_input.typeahead(type='text', name='topics', disabled='true', placeholder='Topics', data-provide="typeahead", autocomplete="off")
+			button.btn#question_submit(type='submit',disabled=true) Add Question

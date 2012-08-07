@@ -1,0 +1,4 @@
+.add_answer
+	form.well(method="post", onsubmit="sendReply('"+question.id+"');return false;")
+		input.answer_text(type='text', name='text', id="answer_"+question.id, placeholder='Respond here.')
+		button.btn(type='submit') Respond

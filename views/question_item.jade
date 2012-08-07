@@ -1,0 +1,13 @@
+.question
+	// 
+		need an indication of status
+		perhaps a checkmark for complete, or change color 
+	.question_title 
+		a(href="#")= question.title
+	.info
+		- var answer_count = (question.answers ? question.answers.length : 0)
+		a(href="#")=  answer_count + ' answer' + (answer_count == 1 ? '' : 's')
+		&nbsp;&nbsp;
+		= ' ' + question.time + ' minutes ago ' // time ago in seconds submitted
+		a(href="#")= question.user.nickname
+	

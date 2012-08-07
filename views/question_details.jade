@@ -1,0 +1,28 @@
+.question.span7(id=question.id)
+	.answer_status
+		- var answer_count = (question.answers ? question.answers.length : 0)
+		a.answer_link.answerCount(href="#")=  answer_count + ' answer' + (answer_count == 1 ? '' : 's')
+	.question_body
+		- if(question.topics)
+			.topics
+				- each topic in question.topics
+					span.tag
+						a.topic(href="#")= topic	
+		.question_title
+			!=md(question.title)
+		.actions
+			a.expand.answer_link(href="#") Expand
+			a.answer_link(href="#") Respond
+			- if (!question.asker)
+				- if (!question.follower)
+					a(href="javascript:followQuestion('"+question.id+"')", id=question.id+"_follow") Follow question
+				- else
+					a(href="javascript:unfollowQuestion('"+question.id+"')", id=question.id+"_follow") Unfollow question
+			-else
+				a.delete_link(href="javascript:deleteQuestion('"+question.id+"')", id=question.id+"_delete") Delete	
+			.info
+				span= question.time+ " by "
+				a(href="#")= question.username
+		.details
+			include answers
+			include newAnswer

@@ -1,0 +1,8 @@
+.answer
+	p
+		!=md(answer.text)
+	.info
+		= answer.time + " by "
+		a(href="#")= answer.user
+	.clear
+		&nbsp;
